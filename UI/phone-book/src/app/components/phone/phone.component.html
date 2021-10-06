@@ -1,0 +1,68 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Yeni Kişi Ekle</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="phoneAddForm">
+          <div class="mb-3">
+            <label for="name">İsim</label>
+            <div class="form-group">
+              <input type="text" id="name" formControlName="name" class="form-control" placeholder="İsim giriniz..." />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="phoneNumber">Numara</label>
+            <div class="form-group">
+              <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control"
+                placeholder="Telefon numarası giriniz..." />
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="content">
+  <div class="content-box">
+    <div class="content-box-header d-flex justify-content-between">
+      <h3>Kişiler</h3>
+    </div>
+    <div class="content-box-body">
+      <dx-data-grid [dataSource]="phones" [showBorders]="true" [showRowLines]="true" [showColumnLines]="true"
+        [rowAlternationEnabled]="true" [wordWrapEnabled]="true">
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <!-- <dxo-paging [enabled]="true" pageSize="10"></dxo-paging> -->
+
+        <dxi-column dataField="id" [allowFiltering]="false" [allowSorting]="false" [sortOrder]="'desc'"
+          cellTemplate="buttons" headerCellTemplate="idAlaniTemplate" [width]="'100px'" caption=""></dxi-column>
+
+        <dxi-column [visible]="false" [allowEditing]="false">
+          <div *dxTemplate="let info of 'idAlaniTemplate'">
+          </div>
+          <div class="d-flex justify-content-center" *dxTemplate="let d of 'buttons'">
+            <button class="btn btn-label bg-primary" title="Düzenle">
+              <i class="dx-icon-edit p-0"></i></button>
+            <button class="btn btn-label bg-danger ml-1" title="Sil" >
+              <i class="dx-icon-trash p-0"></i></button>
+          </div>
+        </dxi-column>
+
+
+        <dxi-column dataField="name" caption="İsim" dataType="string"></dxi-column>
+        <dxi-column dataField="phoneNumber" caption="Numara" dataType="string"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
