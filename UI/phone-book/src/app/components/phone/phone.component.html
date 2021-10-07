@@ -24,7 +24,7 @@
         </form>
       </div>
       <div class="card-footer">
-        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+        <button class="btn btn-fill btn-primary" (click)="addPhone()">Kaydet</button>
       </div>
     </div>
 
@@ -39,22 +39,21 @@
     </div>
     <div class="content-box-body">
       <dx-data-grid [dataSource]="phones" [showBorders]="true" [showRowLines]="true" [showColumnLines]="true"
-        [rowAlternationEnabled]="true" [wordWrapEnabled]="true">
+        [rowAlternationEnabled]="true" [repaintChangesOnly]="true" [columnHidingEnabled]="true">
+        <!-- <dxo-load-panel [enabled]="true"></dxo-load-panel> -->
+
         <dxo-filter-row [visible]="true"></dxo-filter-row>
-        <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
-        <dxo-load-panel [enabled]="true"></dxo-load-panel>
         <!-- <dxo-paging [enabled]="true" pageSize="10"></dxo-paging> -->
 
-        <dxi-column dataField="id" [allowFiltering]="false" [allowSorting]="false" [sortOrder]="'desc'"
-          cellTemplate="buttons" headerCellTemplate="idAlaniTemplate" [width]="'100px'" caption=""></dxi-column>
+        <dxi-column dataField="id" [allowFiltering]="false" [allowSorting]="false" [sortOrder]="'desc'" [sortIndex]="1"
+          cellTemplate="buttons" [width]="'120px'"></dxi-column>
 
         <dxi-column [visible]="false" [allowEditing]="false">
-          <div *dxTemplate="let info of 'idAlaniTemplate'">
-          </div>
-          <div class="d-flex justify-content-center" *dxTemplate="let d of 'buttons'">
-            <button class="btn btn-label bg-primary" title="Düzenle">
+
+          <div class="d-flex justify-content-center" *dxTemplate="let data of 'buttons'">
+            <button class="btn btn-label bg-primary" title="Düzenle" (click)="updatePhone(data.row)">
               <i class="dx-icon-edit p-0"></i></button>
-            <button class="btn btn-label bg-danger ml-1" title="Sil" >
+            <button class="btn btn-label bg-danger ml-1" title="Sil" (click)="deletePhone(data.row)">
               <i class="dx-icon-trash p-0"></i></button>
           </div>
         </dxi-column>
